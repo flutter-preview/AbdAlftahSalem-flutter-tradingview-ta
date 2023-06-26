@@ -21,6 +21,7 @@ class TickersController extends GetxController {
     update();
     dataWithOneInterval = await tradingViewTA.getAnalysis();
     loading = false;
+
     update();
   }
 
