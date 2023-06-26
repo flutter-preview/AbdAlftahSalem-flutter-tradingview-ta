@@ -4,6 +4,7 @@ import 'package:tradingview_ta/exports.dart';
 class TickersController extends GetxController {
   List<Map<String, dynamic>> dataWithOneInterval = [];
   List<Map<String, dynamic>> dataWithMultiInterval = [];
+  bool loading = false;
 
   // create obj to get data
   TradingViewTA tradingViewTA = TradingViewTA(
@@ -16,8 +17,10 @@ class TickersController extends GetxController {
 
   // get data with one interval [ Intervals.INTERVAL_1_HOUR ]
   void getTickerWithOneInterval() async {
+    loading = true;
+    update();
     dataWithOneInterval = await tradingViewTA.getAnalysis();
-    print(dataWithOneInterval);
+    loading = false;
     update();
   }
 

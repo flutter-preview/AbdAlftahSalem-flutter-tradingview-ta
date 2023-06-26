@@ -204,10 +204,10 @@ packages:
     dependency: "direct main"
     description:
       name: tradingview_ta
-      sha256: "232e12b2a6a4b7d30c162d94086d9d129d88b29be7d5b740a6a5c4240823d6cd"
+      sha256: "13679bf8f8be8f73773357375556be475a665a88b8c687db4c540a5c973fac3a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.7.0"
   typed_data:
     dependency: transitive
     description:

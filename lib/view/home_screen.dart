@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tradingview_ta/controller/tickers_controller.dart';
 import 'package:flutter_tradingview_ta/view/widgets/custom_text.dart';
@@ -20,77 +21,93 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: GetBuilder<TickersController>(
-          init: TickersController(),
-          builder: (controller) {
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: SingleChildScrollView(
-                child: DataTable(
-                  headingRowColor: MaterialStateColor.resolveWith(
-                    (states) => const Color(0xff008080).withOpacity(0.8),
-                  ),
-                  dataRowColor: MaterialStateColor.resolveWith(
-                    (states) => const Color(0xffA5CFE3),
-                  ),
-                  columns: [
-                    const DataColumn(
-                      label: CustomText(
-                        txt: "#",
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
+        init: TickersController(),
+        builder: (controller) {
+          return controller.loading
+              ? const Center(child: CupertinoActivityIndicator())
+              : SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SingleChildScrollView(
+                    child: DataTable(
+                      headingRowColor: MaterialStateColor.resolveWith(
+                        (states) => const Color(0xff008080).withOpacity(0.8),
                       ),
-                    ),
-                    ...(controller.dataWithOneInterval[0]["indicators"] as List)
-                        .map(
-                          (e) => DataColumn(
-                            label: CustomText(
-                              txt: e["indicatorsName"],
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
+                      dataRowColor: MaterialStateColor.resolveWith(
+                        (states) => const Color(0xffA5CFE3),
+                      ),
+                      columns: [
+                        const DataColumn(
+                          label: CustomText(
+                            txt: "#",
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
                           ),
-                        )
-                        .toList()
-                  ],
-                  rows: [
-                    ...controller.dataWithOneInterval
-                        .map((e) => DataRow(
-                              cells: [
-                                DataCell(
-                                  CustomText(
-                                    txt: controller.dataWithOneInterval[0]
-                                        ["ticker"],
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                        ),
+                        const DataColumn(
+                          label: CustomText(
+                            txt: "Frame",
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        ...(controller.dataWithOneInterval[0]["indicators"]
+                                as List)
+                            .map(
+                              (e) => DataColumn(
+                                label: CustomText(
+                                  txt: e["indicatorsName"],
+                                  color: Colors.white,
+                                  fontSize: 18,
                                 ),
-                                ...List.generate(
-                                  (controller.dataWithOneInterval[0]
-                                          ["indicators"] as List)
-                                      .length,
-                                  (index) {
-                                    return DataCell(
+                              ),
+                            )
+                            .toList()
+                      ],
+                      rows: [
+                        ...controller.dataWithOneInterval
+                            .map((e) => DataRow(
+                                  cells: [
+                                    DataCell(
                                       CustomText(
-                                        txt: controller.dataWithOneInterval[0]
-                                                ["indicators"][index]["value"]
-                                            .toString(),
+                                        txt: e["ticker"],
                                         color: Colors.white,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
-                                    );
-                                  },
-                                )
-                              ],
-                            ))
-                        .toList(),
-                  ],
-                ),
-              ),
-            );
-          }),
+                                    ),
+                                    DataCell(
+                                      CustomText(
+                                        txt: e["interval"],
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    ...List.generate(
+                                      (e["indicators"] as List).length,
+                                      (index) {
+                                        return DataCell(
+                                          CustomText(
+                                            txt: e["indicators"][index]["value"]
+                                                .toString(),
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  ],
+                                ))
+                            .toList(),
+                      ],
+                    ),
+                  ),
+                );
+        },
+      ),
     );
   }
 }
