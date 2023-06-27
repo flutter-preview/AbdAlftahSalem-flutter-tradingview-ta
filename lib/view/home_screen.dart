@@ -27,85 +27,90 @@ class HomeScreen extends StatelessWidget {
               ? const Center(child: CupertinoActivityIndicator())
               : SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    border: TableBorder.all(
-                      color: Colors.white,
-                      width: 4,
-                    ),
-                    headingRowColor: MaterialStateColor.resolveWith(
-                      (states) => const Color(0xff008080).withOpacity(0.8),
-                    ),
-                    dataRowColor: MaterialStateColor.resolveWith(
-                      (states) => const Color(0xffA5CFE3),
-                    ),
-                    columns: [
-                      const DataColumn(
-                        label: CustomText(
-                          txt: "#",
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                        ),
+                  child: SingleChildScrollView(
+                    child: DataTable(
+                      border: TableBorder.all(
+                        color: Colors.white,
+                        width: 4,
                       ),
-                      const DataColumn(
-                        label: CustomText(
-                          txt: "Frame",
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                        ),
+                      headingRowColor: MaterialStateColor.resolveWith(
+                        (states) => const Color(0xff008080).withOpacity(0.8),
                       ),
-                      ...(controller.dataWithOneInterval[0]["indicators"]
-                              as List)
-                          .map(
-                            (e) => DataColumn(
-                              label: CustomText(
-                                txt: e["indicatorsName"],
-                                color: Colors.white,
-                                fontSize: 18,
+                      dataRowColor: MaterialStateColor.resolveWith(
+                        (states) => const Color(0xffA5CFE3),
+                      ),
+                      columns: [
+                        const DataColumn(
+                          label: CustomText(
+                            txt: "Ticker name",
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const DataColumn(
+                          label: CustomText(
+                            txt: "Frame",
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        ...(controller.dataWithOneInterval[0]["indicators"]
+                                as List)
+                            .map(
+                              (e) => DataColumn(
+                                label: CustomText(
+                                  txt: e["indicatorsName"],
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
-                            ),
-                          )
-                          .toList()
-                    ],
-                    rows: [
-                      ...controller.dataWithOneInterval
-                          .map((e) => DataRow(
-                                cells: [
-                                  DataCell(
-                                    CustomText(
-                                      txt: e["ticker"].toString().split(":")[1],
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                            )
+                            .toList()
+                      ],
+                      rows: [
+                        ...controller.dataWithOneInterval
+                            .map((e) => DataRow(
+                                  cells: [
+                                    DataCell(
+                                      CustomText(
+                                        txt: e["ticker"]
+                                            .toString()
+                                            .split(":")[1],
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  DataCell(
-                                    CustomText(
-                                      txt: e["interval"],
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
+                                    DataCell(
+                                      CustomText(
+                                        txt: e["interval"],
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     ),
-                                  ),
-                                  ...List.generate(
-                                    (e["indicators"] as List).length,
-                                    (index) {
-                                      return DataCell(
-                                        CustomText(
-                                          txt: e["indicators"][index]["value"]
-                                              .toString(),
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      );
-                                    },
-                                  )
-                                ],
-                              ))
-                          .toList(),
-                    ],
+                                    ...List.generate(
+                                      (e["indicators"] as List).length,
+                                      (index) {
+                                        return DataCell(
+                                          CustomText(
+                                            txt: e["indicators"][index]["value"]
+                                                .toString(),
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  ],
+                                ))
+                            .toList(),
+                      ],
+                    ),
                   ),
                 );
         },

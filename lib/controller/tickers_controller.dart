@@ -10,7 +10,7 @@ class TickersController extends GetxController {
   TradingViewTA tradingViewTA = TradingViewTA(
     tradingView: TradingViewModel(
       screener: "crypto",
-      symbols: ["BINANCE:BTCUSDT", "BINANCE:ETHUSDT"],
+      symbols: tickers,
       interval: Intervals.INTERVAL_1_HOUR,
     ),
   );
@@ -42,3 +42,33 @@ class TickersController extends GetxController {
     getTickerWithOneInterval();
   }
 }
+
+var tickers = [
+  "BINANCE:BTCUSDT",
+  "BINANCE:ETHUSDT",
+  "BINANCE:BNBUSDT",
+  "BINANCE:NEOUSDT",
+  "BINANCE:LTCUSDT",
+  "BINANCE:QTUMUSDT",
+  "BINANCE:ADAUSDT",
+  "BINANCE:XRPUSDT",
+  "BINANCE:EOSUSDT",
+  "BINANCE:IOTAUSDT",
+  "BINANCE:XLMUSDT",
+  "BINANCE:ONTUSDT",
+  "BINANCE:TRXUSDT",
+  "BINANCE:ETCUSDT",
+  "BINANCE:ICXUSDT",
+  "BINANCE:NULSUSDT",
+  "BINANCE:VETUSDT",
+  "BINANCE:BCHUSDT",
+  "BINANCE:LINKUSDT",
+  "BINANCE:WAVESUSDT",
+  "BINANCE:ONGUSDT",
+  "BINANCE:HOTUSDT",
+  "BINANCE:ZILUSDT",
+  "BINANCE:ZRXUSDT",
+  "BINANCE:FETUSDT",
+  "BINANCE:BATUSDT",
+  "BINANCE:XMRUSDT"
+];
