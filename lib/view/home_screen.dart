@@ -60,21 +60,11 @@ class HomeScreen extends StatelessWidget {
                                 as List)
                             .map(
                               (e) => DataColumn(
-                                label: Row(
-                                  children: [
-                                    CustomText(
-                                      txt: e["indicatorsName"],
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    const SizedBox(width: 16),
-                                    const Icon(
-                                      Icons.arrow_upward_rounded,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                  ],
+                                label: CustomText(
+                                  txt: e["indicatorsName"],
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
                             )
